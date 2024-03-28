@@ -54,10 +54,10 @@ public enum Rank {
     }
 
     public int subtractRank(Rank rank) {
-        return ordinal() - rank.ordinal();
+        return index - rank.index;
     }
 
     public int findDirection(Rank rank) {
-        return Integer.compare(rank.ordinal(), ordinal());
+        return Integer.compare(rank.index, index);
     }
 }

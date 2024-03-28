@@ -42,10 +42,10 @@ public enum File {
     }
 
     public int subtractFile(File file) {
-        return ordinal() - file.ordinal();
+        return index - file.index;
     }
 
     public int findDirection(File file) {
-        return Integer.compare(file.ordinal(), ordinal());
+        return Integer.compare(file.index, index);
     }
 }
