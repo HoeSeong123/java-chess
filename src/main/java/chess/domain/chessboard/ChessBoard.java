@@ -1,5 +1,6 @@
 package chess.domain.chessboard;
 
+import chess.domain.Turn;
 import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Piece;
 import chess.domain.position.Position;
@@ -18,15 +19,19 @@ public class ChessBoard {
         return new ChessBoard(ChessBoardGenerator.initializeBoard());
     }
 
-    public void move(Position source, Position target) {
+    public Turn move(Position source, Position target, Turn turn) {
         Piece piece = chessBoard.get(source);
         Piece targetPiece = chessBoard.get(target);
+
+        turn.checkValidMove(piece);
 
         checkTargetIsTeam(piece, targetPiece);
         piece.findRoute(source, target, targetPiece)
                 .forEach(this::checkObstacle);
 
         replacePieceToTarget(source, target, piece);
+
+        return turn.changeTurn();
     }
 
     private void checkObstacle(Position position) {

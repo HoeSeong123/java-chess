@@ -49,4 +49,8 @@ public class OutputView {
         pieceBoard.put(Role.EMPTY, ".");
         return pieceBoard;
     }
+
+    public static void printExceptionMessage(String message) {
+        System.out.println(message);
+    }
 }
