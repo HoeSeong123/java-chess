@@ -26,7 +26,7 @@ public class Knight extends Piece {
         int fileDistance = source.calculateFileDistance(target);
         int colDistance = source.calculateRankDistance(target);
 
-        if (!(fileDistance == 2 && colDistance == 1 || fileDistance == 1 && colDistance == 2)) {
+        if (!((fileDistance == 2 && colDistance == 1) || (fileDistance == 1 && colDistance == 2))) {
             throw new IllegalArgumentException("이동할 수 없습니다.");
         }
     }
