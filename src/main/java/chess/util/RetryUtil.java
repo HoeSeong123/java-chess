@@ -12,13 +12,5 @@ public class RetryUtil {
             return read(supplier);
         }
     }
-//
-//    public static <T> T read(Consumer<T> supplier) {
-//        try {
-//            return supplier.accept(T);
-//        } catch (IllegalArgumentException e) {
-//            OutputView.printExceptionMessage(e.getMessage());
-//            return read(supplier);
-//        }
-//    }
+
 }
