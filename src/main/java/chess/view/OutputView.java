@@ -3,14 +3,16 @@ package chess.view;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 
+import chess.domain.chesspiece.Empty;
+import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.Piece;
-import chess.domain.chesspiece.Role;
-import chess.domain.chesspiece.*;
 import chess.domain.chesspiece.pawn.BlackPawn;
 import chess.domain.chesspiece.pawn.WhitePawn;
-import chess.domain.chesspiece.slidingPiece.*;
+import chess.domain.chesspiece.slidingPiece.Bishop;
+import chess.domain.chesspiece.slidingPiece.King;
+import chess.domain.chesspiece.slidingPiece.Queen;
+import chess.domain.chesspiece.slidingPiece.Rook;
 import chess.domain.position.Position;
-import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 

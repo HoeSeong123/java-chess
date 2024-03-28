@@ -1,6 +1,5 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.chesspiece.Role.EMPTY;
 import static chess.domain.chesspiece.Team.NOTHING;
 
 import chess.domain.position.Position;

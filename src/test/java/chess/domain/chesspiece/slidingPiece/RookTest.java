@@ -17,7 +17,8 @@ class RookTest {
     @DisplayName("목적지 제외 세로로 갈 수 있는 위치들을 반환한다.")
     void Rook_Check_vertical_route() {
         Piece piece = new Rook(WHITE);
-        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("e", "1"), new Empty());
+        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("e", "1"),
+                new Empty());
         List<Position> positions = List.of(new Position("b", "1"), new Position("c", "1"),
                 new Position("d", "1"));
         assertThat(route).isEqualTo(positions);
@@ -27,7 +28,8 @@ class RookTest {
     @DisplayName("목적지 제외 가로로 갈 수 있는 위치들을 반환한다.")
     void Rook_Check_horizontal_route() {
         Piece piece = new Rook(WHITE);
-        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "5"), new Empty());
+        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "5"),
+                new Empty());
         List<Position> positions = List.of(new Position("a", "2"), new Position("a", "3"),
                 new Position("a", "4"));
         assertThat(route).isEqualTo(positions);

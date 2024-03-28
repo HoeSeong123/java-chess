@@ -1,9 +1,7 @@
 package chess.domain.chesspiece.pawn;
 
-import static chess.domain.chesspiece.Role.WHITE_PAWN;
 import static chess.domain.chesspiece.Team.WHITE;
 
-import chess.domain.chesspiece.Role;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
 

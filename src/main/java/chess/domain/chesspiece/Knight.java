@@ -1,8 +1,5 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.chesspiece.Role.BLACK_KNIGHT;
-import static chess.domain.chesspiece.Role.WHITE_KNIGHT;
-
 import chess.domain.position.Position;
 import java.util.ArrayList;
 import java.util.Collections;

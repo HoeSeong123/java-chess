@@ -1,9 +1,5 @@
 package chess.domain.chesspiece.slidingPiece;
 
-import static chess.domain.chesspiece.Role.BLACK_ROOK;
-import static chess.domain.chesspiece.Role.WHITE_ROOK;
-
-import chess.domain.chesspiece.Role;
 import chess.domain.chesspiece.Team;
 import chess.domain.position.Position;
 

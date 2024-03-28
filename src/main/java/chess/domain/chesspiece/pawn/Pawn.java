@@ -20,7 +20,7 @@ public abstract class Pawn extends Piece {
 
     @Override
     public List<Position> findRoute(Position source, Position target, Piece targetPiece) {
-        if(targetPiece.isEmpty()) {
+        if (targetPiece.isEmpty()) {
             return findMovingRoute(source, target);
         }
 

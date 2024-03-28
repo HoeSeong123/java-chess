@@ -58,7 +58,7 @@ public class ChessBoardGenerator {
     }
 
     private static void initializeFiles(Map<Position, Piece> board, Rank rank, Piece piece) {
-        for(File file : File.values()) {
+        for (File file : File.values()) {
             board.put(new Position(file, rank), piece);
         }
     }

@@ -1,7 +1,5 @@
 package chess.domain.chessboard;
 
-import static chess.domain.chesspiece.Role.*;
-
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -11,7 +9,10 @@ import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.pawn.BlackPawn;
 import chess.domain.chesspiece.pawn.WhitePawn;
-import chess.domain.chesspiece.slidingPiece.*;
+import chess.domain.chesspiece.slidingPiece.Bishop;
+import chess.domain.chesspiece.slidingPiece.King;
+import chess.domain.chesspiece.slidingPiece.Queen;
+import chess.domain.chesspiece.slidingPiece.Rook;
 import chess.domain.position.Position;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

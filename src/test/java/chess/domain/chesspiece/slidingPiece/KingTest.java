@@ -17,7 +17,8 @@ class KingTest {
     @DisplayName("왕은 앞뒤로 움직일 수 있다.")
     void King_Move_forward_and_backward() {
         Piece piece = new King(WHITE);
-        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "2"), new Empty());
+        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "2"),
+                new Empty());
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -26,7 +27,8 @@ class KingTest {
     @DisplayName("왕은 좌우로 움직일 수 있다.")
     void King_Move_side() {
         Piece piece = new King(WHITE);
-        List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "2"), new Empty());
+        List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "2"),
+                new Empty());
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -35,7 +37,8 @@ class KingTest {
     @DisplayName("왕은 대각선으로 움직일 수 있다.")
     void King_Move_diagonal() {
         Piece piece = new King(WHITE);
-        List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "1"), new Empty());
+        List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "1"),
+                new Empty());
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }

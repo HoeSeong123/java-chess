@@ -25,9 +25,9 @@ public class ChessBoard {
 
         turn.checkValidMove(piece);
 
-        checkTargetIsTeam(piece, targetPiece);
         piece.findRoute(source, target, targetPiece)
                 .forEach(this::checkObstacle);
+        checkTargetIsTeam(piece, targetPiece);
 
         replacePieceToTarget(source, target, piece);
 
@@ -42,7 +42,7 @@ public class ChessBoard {
     }
 
     private void checkTargetIsTeam(Piece source, Piece target) {
-        if(source.isTeam(target)) {
+        if (source.isTeam(target)) {
             throw new IllegalArgumentException("같은 팀이 있는 곳으로는 이동할 수 없습니다.");
         }
     }

@@ -11,7 +11,7 @@ public enum Turn {
     BLACK_TURN;
 
     public Turn changeTurn() {
-        if(this == WHITE_TURN) {
+        if (this == WHITE_TURN) {
             return BLACK_TURN;
         }
         return WHITE_TURN;
@@ -19,10 +19,10 @@ public enum Turn {
 
     public void checkValidMove(Piece piece) {
         Team team = piece.getTeam();
-        if(this == WHITE_TURN && team == BLACK) {
+        if (this == WHITE_TURN && team == BLACK) {
             throw new IllegalArgumentException("백팀이 움직일 차례입니다.");
         }
-        if(this == BLACK_TURN && team == WHITE) {
+        if (this == BLACK_TURN && team == WHITE) {
             throw new IllegalArgumentException("흑팀이 움직일 차례입니다.");
         }
     }
