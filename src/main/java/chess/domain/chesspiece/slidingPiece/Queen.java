@@ -22,12 +22,4 @@ public class Queen extends SlidingPiece {
             throw new IllegalArgumentException("이동할 수 없습니다.");
         }
     }
-
-    @Override
-    public Role getRole() {
-        if (getTeam().isWhite()) {
-            return WHITE_QUEEN;
-        }
-        return BLACK_QUEEN;
-    }
 }

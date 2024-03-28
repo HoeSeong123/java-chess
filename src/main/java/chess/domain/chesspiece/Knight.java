@@ -32,14 +32,6 @@ public class Knight extends Piece {
     }
 
     @Override
-    public Role getRole() {
-        if (getTeam().isWhite()) {
-            return WHITE_KNIGHT;
-        }
-        return BLACK_KNIGHT;
-    }
-
-    @Override
     public boolean isPawn() {
         return false;
     }

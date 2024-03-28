@@ -23,9 +23,4 @@ public class BlackPawn extends Pawn {
     protected boolean isStartPosition(Position source) {
         return source.getRank() == BLACK_PAWN_START_COLUMN;
     }
-
-    @Override
-    public Role getRole() {
-        return BLACK_PAWN;
-    }
 }

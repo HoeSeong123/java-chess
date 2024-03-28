@@ -1,13 +1,21 @@
 package chess.view;
 
+import static chess.domain.chesspiece.Team.BLACK;
+import static chess.domain.chesspiece.Team.WHITE;
+
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.Role;
+import chess.domain.chesspiece.*;
+import chess.domain.chesspiece.pawn.BlackPawn;
+import chess.domain.chesspiece.pawn.WhitePawn;
+import chess.domain.chesspiece.slidingPiece.*;
 import chess.domain.position.Position;
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class OutputView {
-    private static final EnumMap<Role, String> pieceBoard = initializePiece();
+    private static final Map<Piece, String> pieceBoard = initializePiece();
 
     public static void printChessBoard(Map<Position, Piece> chessBoard) {
         int count = 1;
@@ -22,7 +30,7 @@ public class OutputView {
     }
 
     private static void printPiece(Piece piece) {
-        System.out.print(pieceBoard.get(piece.getRole()));
+        System.out.print(pieceBoard.get(piece));
     }
 
     public static void printStartMessage() {
@@ -32,21 +40,21 @@ public class OutputView {
         System.out.println("> 게임 이동 : move source위치 target위치 - 예. move b2 b3`");
     }
 
-    private static EnumMap<Role, String> initializePiece() {
-        EnumMap<Role, String> pieceBoard = new EnumMap<>(Role.class);
-        pieceBoard.put(Role.BLACK_KING, "K");
-        pieceBoard.put(Role.WHITE_KING, "k");
-        pieceBoard.put(Role.BLACK_QUEEN, "Q");
-        pieceBoard.put(Role.WHITE_QUEEN, "q");
-        pieceBoard.put(Role.BLACK_ROOK, "R");
-        pieceBoard.put(Role.WHITE_ROOK, "r");
-        pieceBoard.put(Role.BLACK_BISHOP, "B");
-        pieceBoard.put(Role.WHITE_BISHOP, "b");
-        pieceBoard.put(Role.BLACK_KNIGHT, "N");
-        pieceBoard.put(Role.WHITE_KNIGHT, "n");
-        pieceBoard.put(Role.BLACK_PAWN, "P");
-        pieceBoard.put(Role.WHITE_PAWN, "p");
-        pieceBoard.put(Role.EMPTY, ".");
+    private static Map<Piece, String> initializePiece() {
+        Map<Piece, String> pieceBoard = new HashMap<>();
+        pieceBoard.put(new King(BLACK), "K");
+        pieceBoard.put(new King(WHITE), "k");
+        pieceBoard.put(new Queen(BLACK), "Q");
+        pieceBoard.put(new Queen(WHITE), "q");
+        pieceBoard.put(new Rook(BLACK), "R");
+        pieceBoard.put(new Rook(WHITE), "r");
+        pieceBoard.put(new Bishop(BLACK), "B");
+        pieceBoard.put(new Bishop(WHITE), "b");
+        pieceBoard.put(new Knight(BLACK), "N");
+        pieceBoard.put(new Knight(WHITE), "n");
+        pieceBoard.put(new BlackPawn(), "P");
+        pieceBoard.put(new WhitePawn(), "p");
+        pieceBoard.put(new Empty(), ".");
         return pieceBoard;
     }
 

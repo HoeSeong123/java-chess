@@ -22,11 +22,6 @@ public class Empty extends Piece {
     }
 
     @Override
-    public Role getRole() {
-        return EMPTY;
-    }
-
-    @Override
     public boolean isPawn() {
         return false;
     }
