@@ -1,5 +1,6 @@
 package chess;
 
+import static chess.domain.Command.STATUS;
 import static chess.domain.GameStatus.GAME_OVER;
 import static chess.domain.GameStatus.WHITE_TURN;
 
@@ -25,7 +26,12 @@ public class ChessGame {
             OutputView.printChessBoard(chessBoard.getChessBoard());
             gameStatus = RetryUtil.read(() -> processGame(chessBoard));
         }
-        OutputView.printScore(chessBoard.calculateTotalScore());
+        OutputView.printGameOverMessage();
+
+        command = RetryUtil.read(() -> Command.getClosingCommand(InputView.readCommand()));
+        if(command == STATUS) {
+            OutputView.printScore(chessBoard.calculateTotalScore());
+        }
     }
 
     private GameStatus processGame(ChessBoard chessBoard) {

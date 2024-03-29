@@ -58,10 +58,20 @@ public class OutputView {
     }
 
     public static void printScore(Map<Team, Score> calculateTotalScore) {
-        for (Team team : calculateTotalScore.keySet()) {
-            System.out.println(String.format("%s팀 점수 : %.1f", teamBoard.get(team),
-                    calculateTotalScore.get(team)
-                            .getScore()));
+        double whiteScore = calculateTotalScore.get(WHITE).getScore();
+        double blackScore = calculateTotalScore.get(BLACK).getScore();
+
+        System.out.println(String.format("%s팀 점수 : %.1f", WHITE, whiteScore));
+        System.out.println(String.format("%s팀 점수 : %.1f", BLACK, blackScore));
+
+        if(whiteScore > blackScore) {
+            System.out.println("백팀 승");
+        }
+        if(whiteScore == blackScore) {
+            System.out.println("무승부");
+        }
+        if(whiteScore < blackScore) {
+            System.out.println("흑팀 승");
         }
     }
 
@@ -88,5 +98,10 @@ public class OutputView {
         teamBoard.put(BLACK, "흑");
 
         return teamBoard;
+    }
+
+    public static void printGameOverMessage() {
+        System.out.println("> 게임이 종료되었습니다.");
+        System.out.println("> 결과 확인 : status");
     }
 }
