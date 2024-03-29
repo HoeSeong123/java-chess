@@ -20,7 +20,7 @@ public class ChessBoard {
         }
         Piece piece = chessBoard.get(source);
 
-        turn.checkValidMove(piece);
+        piece.checkValidMove(turn);
 
         checkTargetIsTeam(piece, target);
         piece.findRoute(source, target, isEmpty(target))

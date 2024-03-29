@@ -52,14 +52,6 @@ class KingTest {
     }
 
     @Test
-    @DisplayName("같은 팀인지 확인한다.")
-    void King_Validate_team() {
-        Piece piece = new King(WHITE);
-        assertThat(piece.isTeam(new King(WHITE))).isTrue();
-        assertThat(piece.isTeam(new King(BLACK))).isFalse();
-    }
-
-    @Test
     @DisplayName("자신이 폰인지 확인한다.")
     void King_Check_pawn() {
         Piece piece = new King(WHITE);

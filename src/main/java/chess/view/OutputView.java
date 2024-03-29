@@ -30,7 +30,7 @@ public class OutputView {
     private static void printOneRank(Map<Position, Piece> chessBoard, int rankIndex) {
         for (int j = 1; j <= 8; j++) {
             Position position = new Position(File.from(j), Rank.from(rankIndex));
-            System.out.println(getPiece(chessBoard, position));
+            System.out.print(getPiece(chessBoard, position));
         }
         System.out.println();
     }

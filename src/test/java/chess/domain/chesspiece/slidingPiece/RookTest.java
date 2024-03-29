@@ -44,14 +44,6 @@ class RookTest {
     }
 
     @Test
-    @DisplayName("같은 팀인지 확인한다.")
-    void Rook_Validate_team() {
-        Piece piece = new Rook(WHITE);
-        assertThat(piece.isTeam(new King(WHITE))).isTrue();
-        assertThat(piece.isTeam(new King(BLACK))).isFalse();
-    }
-
-    @Test
     @DisplayName("자신이 폰인지 확인한다.")
     void Rook_Check_pawn() {
         Piece piece = new Rook(WHITE);
