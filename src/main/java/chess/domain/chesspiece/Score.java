@@ -1,9 +1,8 @@
 package chess.domain.chesspiece;
 
-public class Score {
-    private double score;
+public record Score(double value) {
 
-    public Score(double score) {
-        this.score = score;
+    public Score sum(Score score) {
+        return new Score(value + score.value);
     }
 }
