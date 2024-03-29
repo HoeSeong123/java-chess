@@ -26,7 +26,7 @@ public class ChessBoard {
     public GameStatus move(Position source, Position target, GameStatus gameStatus) {
         checkEmpty(source);
 
-        Piece piece = chessBoard.get(source);
+        Piece piece = getPiece(source);
         piece.checkValidMove(gameStatus);
 
         checkTargetIsTeam(piece, target);
@@ -42,10 +42,6 @@ public class ChessBoard {
         }
     }
 
-    private boolean isEmpty(Position target) {
-        return !chessBoard.containsKey(target);
-    }
-
     private void checkObstacle(Position position) {
         if (!isEmpty(position)) {
             throw new IllegalArgumentException("방해물이 있어 이동할 수 없습니다.");
@@ -53,30 +49,24 @@ public class ChessBoard {
     }
 
     private void checkTargetIsTeam(Piece source, Position targetPosition) {
-        if (!isEmpty(targetPosition) && source.isTeam(chessBoard.get(targetPosition))) {
+        if (!isEmpty(targetPosition) && source.isTeam(getPiece(targetPosition))) {
             throw new IllegalArgumentException("같은 팀이 있는 곳으로는 이동할 수 없습니다.");
         }
     }
 
     private GameStatus replacePieceToTarget(Position source, Position target, GameStatus turn) {
-        if (!isEmpty(target) && chessBoard.get(target)
-                .isKing()) {
+        if (!isEmpty(target) && getPiece(target).isKing()) {
             return GAME_OVER;
         }
-        Piece piece = chessBoard.get(source);
+        Piece piece = getPiece(source);
         chessBoard.remove(source);
         chessBoard.put(target, piece);
 
         return turn.changeTurn();
     }
 
-    public Map<Position, Piece> getChessBoard() {
-        return Collections.unmodifiableMap(chessBoard);
-    }
-
     public Map<Team, Score> calculateTotalScore() {
         Map<Team, Score> score = new HashMap<>();
-
         score.put(WHITE, calculateTeamScore(WHITE));
         score.put(BLACK, calculateTeamScore(BLACK));
 
@@ -110,5 +100,17 @@ public class ChessBoard {
         }
 
         return score;
+    }
+
+    private boolean isEmpty(Position target) {
+        return !chessBoard.containsKey(target);
+    }
+
+    private Piece getPiece(Position position) {
+        return chessBoard.get(position);
+    }
+
+    public Map<Position, Piece> getChessBoard() {
+        return Collections.unmodifiableMap(chessBoard);
     }
 }
