@@ -33,7 +33,7 @@ public enum File {
 
     public File update(int value) {
         int index = this.index + value;
-        if (index >= values().length) {
+        if (index > values().length) {
             throw new IllegalArgumentException("보드판 밖으로 이동할 수 없습니다.");
         }
         return findFile(index);

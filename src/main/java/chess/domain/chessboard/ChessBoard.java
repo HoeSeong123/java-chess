@@ -1,9 +1,10 @@
 package chess.domain.chessboard;
 
+import static chess.domain.GameStatus.GAME_OVER;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 
-import chess.domain.Turn;
+import chess.domain.GameStatus;
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.Score;
 import chess.domain.chesspiece.Team;
@@ -22,7 +23,7 @@ public class ChessBoard {
         this.chessBoard = chessBoard;
     }
 
-    public Turn move(Position source, Position target, Turn turn) {
+    public GameStatus move(Position source, Position target, GameStatus turn) {
         if (isEmpty(source)) {
             throw new IllegalArgumentException("해당 공간에는 기물이 존재하지 않습니다.");
         }
@@ -34,9 +35,7 @@ public class ChessBoard {
         piece.findRoute(source, target, isEmpty(target))
                 .forEach(this::checkObstacle);
 
-        replacePieceToTarget(source, target, piece);
-
-        return turn.changeTurn();
+        return replacePieceToTarget(source, target, turn);
     }
 
     private boolean isEmpty(Position target) {
@@ -55,9 +54,15 @@ public class ChessBoard {
         }
     }
 
-    private void replacePieceToTarget(Position source, Position target, Piece piece) {
+    private GameStatus replacePieceToTarget(Position source, Position target, GameStatus turn) {
+        if(!isEmpty(target) && chessBoard.get(target).isKing()) {
+            return GAME_OVER;
+        }
+        Piece piece = chessBoard.get(source);
         chessBoard.remove(source);
         chessBoard.put(target, piece);
+
+        return turn.changeTurn();
     }
 
     public Map<Position, Piece> getChessBoard() {

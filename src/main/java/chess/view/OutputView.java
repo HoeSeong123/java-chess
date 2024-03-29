@@ -5,6 +5,8 @@ import static chess.domain.chesspiece.Team.WHITE;
 
 import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.Piece;
+import chess.domain.chesspiece.Score;
+import chess.domain.chesspiece.Team;
 import chess.domain.chesspiece.pawn.BlackPawn;
 import chess.domain.chesspiece.pawn.WhitePawn;
 import chess.domain.chesspiece.slidingPiece.Bishop;
@@ -19,6 +21,7 @@ import java.util.Map;
 
 public class OutputView {
     private static final Map<Piece, String> pieceBoard = initializePiece();
+    private static final Map<Team, String> teamBoard = initializeTeam();
 
     public static void printChessBoard(Map<Position, Piece> chessBoard) {
         for(int i = 8; i >= 1; i--) {
@@ -50,6 +53,16 @@ public class OutputView {
         System.out.println("> 게임 이동 : move source위치 target위치 - 예. move b2 b3`");
     }
 
+    public static void printExceptionMessage(String message) {
+        System.out.println(message);
+    }
+
+    public static void printScore(Map<Team, Score> calculateTotalScore) {
+        for(Team team : calculateTotalScore.keySet()) {
+            System.out.println(String.format("%s팀 점수 : %.1f", teamBoard.get(team), calculateTotalScore.get(team).getScore()));
+        }
+    }
+
     private static Map<Piece, String> initializePiece() {
         Map<Piece, String> pieceBoard = new HashMap<>();
         pieceBoard.put(new King(BLACK), "K");
@@ -67,7 +80,11 @@ public class OutputView {
         return pieceBoard;
     }
 
-    public static void printExceptionMessage(String message) {
-        System.out.println(message);
+    private static Map<Team, String> initializeTeam() {
+        Map<Team, String> teamBoard = new HashMap<>();
+        teamBoard.put(WHITE, "백");
+        teamBoard.put(BLACK, "흑");
+
+        return teamBoard;
     }
 }

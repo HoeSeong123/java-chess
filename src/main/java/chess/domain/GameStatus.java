@@ -1,10 +1,11 @@
 package chess.domain;
 
-public enum Turn {
+public enum GameStatus {
     WHITE_TURN,
-    BLACK_TURN;
+    BLACK_TURN,
+    GAME_OVER;
 
-    public Turn changeTurn() {
+    public GameStatus changeTurn() {
         if (this == WHITE_TURN) {
             return BLACK_TURN;
         }

@@ -1,11 +1,10 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.Turn.WHITE_TURN;
+import static chess.domain.GameStatus.WHITE_TURN;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
-import static org.junit.jupiter.api.Assertions.*;
 
 import chess.domain.chesspiece.slidingPiece.King;
 import org.junit.jupiter.api.DisplayName;

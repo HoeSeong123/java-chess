@@ -1,11 +1,11 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.Turn.BLACK_TURN;
-import static chess.domain.Turn.WHITE_TURN;
+import static chess.domain.GameStatus.BLACK_TURN;
+import static chess.domain.GameStatus.WHITE_TURN;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 
-import chess.domain.Turn;
+import chess.domain.GameStatus;
 import chess.domain.position.Position;
 import java.util.List;
 import java.util.Objects;
@@ -29,7 +29,7 @@ public abstract class Piece {
 
     public abstract Score calculateScore(Score score, boolean hasSameFilePawn);
 
-    public void checkValidMove(Turn turn) {
+    public void checkValidMove(GameStatus turn) {
         if (turn == WHITE_TURN && team == BLACK) {
             throw new IllegalArgumentException("백팀이 움직일 차례입니다.");
         }
@@ -40,6 +40,10 @@ public abstract class Piece {
 
     public boolean isTeam(Piece piece) {
         return team == piece.team;
+    }
+
+    public boolean isKing() {
+        return false;
     }
 
     public Team getTeam() {

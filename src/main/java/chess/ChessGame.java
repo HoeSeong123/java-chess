@@ -1,9 +1,10 @@
 package chess;
 
-import static chess.domain.Turn.WHITE_TURN;
+import static chess.domain.GameStatus.GAME_OVER;
+import static chess.domain.GameStatus.WHITE_TURN;
 
 import chess.domain.Command;
-import chess.domain.Turn;
+import chess.domain.GameStatus;
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.position.Position;
@@ -13,28 +14,30 @@ import chess.view.OutputView;
 import java.util.List;
 
 public class ChessGame {
-    private Turn currentTurn = WHITE_TURN;
+    private GameStatus gameStatus;
 
     public void run() {
         OutputView.printStartMessage();
         Command command = RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
         ChessBoard chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
-        while (!command.isEnd()) {
+        gameStatus = WHITE_TURN;
+        while (gameStatus != GAME_OVER) {
             OutputView.printChessBoard(chessBoard.getChessBoard());
-            command = RetryUtil.read(() -> processGame(chessBoard));
+            gameStatus = RetryUtil.read(() -> processGame(chessBoard));
         }
+        OutputView.printScore(chessBoard.calculateTotalScore());
     }
 
-    private Command processGame(ChessBoard chessBoard) {
+    private GameStatus processGame(ChessBoard chessBoard) {
         Command command = Command.getProcessCommand(InputView.readCommand());
         if (command.isMove()) {
             List<String> sourcePosition = InputView.readPosition();
             Position source = new Position(sourcePosition.get(0), sourcePosition.get(1));
             List<String> targetPosition = InputView.readPosition();
             Position target = new Position(targetPosition.get(0), targetPosition.get(1));
-            currentTurn = chessBoard.move(source, target, currentTurn);
-        }
 
-        return command;
+            return chessBoard.move(source, target, gameStatus);
+        }
+        return GAME_OVER;
     }
 }
