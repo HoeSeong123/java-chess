@@ -24,11 +24,9 @@ public class ChessBoard {
     }
 
     public GameStatus move(Position source, Position target, GameStatus turn) {
-        if (isEmpty(source)) {
-            throw new IllegalArgumentException("해당 공간에는 기물이 존재하지 않습니다.");
-        }
-        Piece piece = chessBoard.get(source);
+        checkEmpty(source);
 
+        Piece piece = chessBoard.get(source);
         piece.checkValidMove(turn);
 
         checkTargetIsTeam(piece, target);
@@ -36,6 +34,12 @@ public class ChessBoard {
                 .forEach(this::checkObstacle);
 
         return replacePieceToTarget(source, target, turn);
+    }
+
+    private void checkEmpty(Position position) {
+        if (isEmpty(position)) {
+            throw new IllegalArgumentException("해당 공간에는 기물이 존재하지 않습니다.");
+        }
     }
 
     private boolean isEmpty(Position target) {
@@ -71,11 +75,9 @@ public class ChessBoard {
 
     public Map<Team, Score> calculateTotalScore() {
         Map<Team, Score> score = new HashMap<>();
-        Score whiteScore = calculateTeamScore(WHITE);
-        Score blackScore = calculateTeamScore(BLACK);
 
-        score.put(WHITE, whiteScore);
-        score.put(BLACK, blackScore);
+        score.put(WHITE, calculateTeamScore(WHITE));
+        score.put(BLACK, calculateTeamScore(BLACK));
 
         return score;
     }
