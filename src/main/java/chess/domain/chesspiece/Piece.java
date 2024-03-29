@@ -6,9 +6,11 @@ import java.util.Objects;
 
 public abstract class Piece {
     private final Team team;
+    private final Score score;
 
-    public Piece(Team team) {
+    public Piece(Team team, Score score) {
         this.team = team;
+        this.score = score;
     }
 
     public abstract List<Position> findRoute(Position source, Position target, Piece targetPiece);

@@ -8,7 +8,7 @@ import java.util.List;
 public class Empty extends Piece {
 
     public Empty() {
-        super(NOTHING);
+        super(NOTHING, new Score(0));
     }
 
     @Override

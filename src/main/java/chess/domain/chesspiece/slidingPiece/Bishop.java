@@ -1,12 +1,13 @@
 package chess.domain.chesspiece.slidingPiece;
 
+import chess.domain.chesspiece.Score;
 import chess.domain.chesspiece.Team;
 import chess.domain.position.Position;
 
 public class Bishop extends SlidingPiece {
 
     public Bishop(Team team) {
-        super(team);
+        super(team, new Score(3));
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.util.List;
 public class Knight extends Piece {
 
     public Knight(Team team) {
-        super(team);
+        super(team, new Score(2.5));
     }
 
     @Override

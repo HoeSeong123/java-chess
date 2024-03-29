@@ -1,6 +1,7 @@
 package chess.domain.chesspiece.pawn;
 
 import chess.domain.chesspiece.Piece;
+import chess.domain.chesspiece.Score;
 import chess.domain.chesspiece.Team;
 import chess.domain.position.Direction;
 import chess.domain.position.Position;
@@ -10,8 +11,8 @@ import java.util.List;
 
 public abstract class Pawn extends Piece {
 
-    public Pawn(Team team) {
-        super(team);
+    public Pawn(Team team, Score score) {
+        super(team, score);
     }
 
     protected abstract int calculatePawnRankDistance(Position source, Position target);
