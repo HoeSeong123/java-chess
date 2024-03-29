@@ -23,17 +23,17 @@ public class ChessBoard {
         this.chessBoard = chessBoard;
     }
 
-    public GameStatus move(Position source, Position target, GameStatus turn) {
+    public GameStatus move(Position source, Position target, GameStatus gameStatus) {
         checkEmpty(source);
 
         Piece piece = chessBoard.get(source);
-        piece.checkValidMove(turn);
+        piece.checkValidMove(gameStatus);
 
         checkTargetIsTeam(piece, target);
         piece.findRoute(source, target, isEmpty(target))
                 .forEach(this::checkObstacle);
 
-        return replacePieceToTarget(source, target, turn);
+        return replacePieceToTarget(source, target, gameStatus);
     }
 
     private void checkEmpty(Position position) {
