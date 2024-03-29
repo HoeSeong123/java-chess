@@ -27,6 +27,8 @@ public abstract class Piece {
 
     public abstract boolean isEmpty();
 
+    public abstract Score calculateScore(Score score, boolean hasSameFilePawn);
+
     public void checkValidMove(Turn turn) {
         if (turn == WHITE_TURN && team == BLACK) {
             throw new IllegalArgumentException("백팀이 움직일 차례입니다.");
@@ -40,8 +42,12 @@ public abstract class Piece {
         return team == piece.team;
     }
 
-    public final Team getTeam() {
+    public Team getTeam() {
         return team;
+    }
+
+    public Score getScore() {
+        return score;
     }
 
     @Override

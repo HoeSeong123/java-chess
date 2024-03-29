@@ -82,4 +82,24 @@ class PawnTest {
         Piece piece = new WhitePawn();
         assertThat(piece.isPawn()).isTrue();
     }
+
+    @Test
+    @DisplayName("세로줄에 같은 색의 폰이 없는 경우 점수에 1점을 추가하여 반환한다.")
+    void Pawn_Sum_one_point_when_not_exist_same_file_pawn() {
+        var sut = new WhitePawn();
+
+        var result = sut.calculateScore(new Score(0), false);
+
+        assertThat(result).isEqualTo(new Score(1));
+    }
+
+    @Test
+    @DisplayName("세로줄에 같은 색의 폰이 있는 경우 점수에 0.5점을 추가하여 반환한다.")
+    void Pawn_Sum_half_point_when_not_exist_same_file_pawn() {
+        var sut = new WhitePawn();
+
+        var result = sut.calculateScore(new Score(0), true);
+
+        assertThat(result).isEqualTo(new Score(0.5));
+    }
 }

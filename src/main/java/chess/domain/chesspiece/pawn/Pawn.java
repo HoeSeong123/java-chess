@@ -88,4 +88,12 @@ public abstract class Pawn extends Piece {
     public boolean isEmpty() {
         return false;
     }
+
+    @Override
+    public Score calculateScore(Score score, boolean hasSameFilePawn) {
+        if(hasSameFilePawn) {
+            return score.sum(new Score(0.5));
+        }
+        return score.sum(getScore());
+    }
 }

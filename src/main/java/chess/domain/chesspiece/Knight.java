@@ -37,4 +37,9 @@ public class Knight extends Piece {
     public boolean isEmpty() {
         return false;
     }
+
+    @Override
+    public Score calculateScore(Score score, boolean hasSameFilePawn) {
+        return score.sum(getScore());
+    }
 }
