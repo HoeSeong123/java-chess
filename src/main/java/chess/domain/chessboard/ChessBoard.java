@@ -59,7 +59,8 @@ public class ChessBoard {
     }
 
     private GameStatus replacePieceToTarget(Position source, Position target, GameStatus turn) {
-        if(!isEmpty(target) && chessBoard.get(target).isKing()) {
+        if (!isEmpty(target) && chessBoard.get(target)
+                .isKing()) {
             return GAME_OVER;
         }
         Piece piece = chessBoard.get(source);
@@ -87,7 +88,8 @@ public class ChessBoard {
         for (File file : File.values()) {
             List<Piece> pieces = chessBoard.keySet()
                     .stream()
-                    .filter(position -> chessBoard.get(position).getTeam() == team)
+                    .filter(position -> chessBoard.get(position)
+                            .getTeam() == team)
                     .filter(position -> position.hasFile(file))
                     .map(chessBoard::get)
                     .toList();

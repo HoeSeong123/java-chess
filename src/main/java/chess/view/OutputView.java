@@ -24,7 +24,7 @@ public class OutputView {
     private static final Map<Team, String> teamBoard = initializeTeam();
 
     public static void printChessBoard(Map<Position, Piece> chessBoard) {
-        for(int i = 8; i >= 1; i--) {
+        for (int i = 8; i >= 1; i--) {
             printOneRank(chessBoard, i);
         }
         System.out.println();
@@ -39,7 +39,7 @@ public class OutputView {
     }
 
     private static String getPiece(Map<Position, Piece> chessBoard, Position position) {
-        if(chessBoard.containsKey(position)) {
+        if (chessBoard.containsKey(position)) {
             Piece piece = chessBoard.get(position);
             return pieceBoard.get(piece);
         }
@@ -58,8 +58,10 @@ public class OutputView {
     }
 
     public static void printScore(Map<Team, Score> calculateTotalScore) {
-        for(Team team : calculateTotalScore.keySet()) {
-            System.out.println(String.format("%s팀 점수 : %.1f", teamBoard.get(team), calculateTotalScore.get(team).getScore()));
+        for (Team team : calculateTotalScore.keySet()) {
+            System.out.println(String.format("%s팀 점수 : %.1f", teamBoard.get(team),
+                    calculateTotalScore.get(team)
+                            .getScore()));
         }
     }
 

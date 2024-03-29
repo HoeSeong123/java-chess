@@ -34,7 +34,7 @@ class ChessBoardTest {
         Position target = new Position(File.b, Rank.SEVEN);
         var sut = new ChessBoard(
                 new HashMap<>() {{
-                        put(new Position(File.b, Rank.EIGHT), new King(BLACK));
+                    put(new Position(File.b, Rank.EIGHT), new King(BLACK));
                 }}
         );
 
@@ -82,7 +82,8 @@ class ChessBoardTest {
         Position source = new Position(File.a, Rank.SEVEN);
         Position target = new Position(File.b, Rank.EIGHT);
         var sut = new ChessBoard(
-                new HashMap<>() {{}}
+                new HashMap<>() {{
+                }}
         );
 
         assertThatThrownBy(() -> {

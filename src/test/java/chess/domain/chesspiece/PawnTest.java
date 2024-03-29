@@ -1,13 +1,9 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.chesspiece.Team.BLACK;
-import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import chess.domain.chesspiece.pawn.BlackPawn;
 import chess.domain.chesspiece.pawn.WhitePawn;
-import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.position.Position;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;

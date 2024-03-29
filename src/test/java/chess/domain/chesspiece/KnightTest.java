@@ -1,11 +1,9 @@
 package chess.domain.chesspiece;
 
-import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.position.Position;
 import java.util.List;
 import org.junit.jupiter.api.DisplayName;
@@ -16,7 +14,8 @@ class KnightTest {
     @DisplayName("목적지 제외 갈 수 있는 위치들을 반환한다.")
     void Knight_Check_route() {
         Piece piece = new Knight(WHITE);
-        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("b", "3"), true);
+        List<Position> route = piece.findRoute(new Position("a", "1"), new Position("b", "3"),
+                true);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }

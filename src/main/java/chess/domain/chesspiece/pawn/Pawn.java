@@ -91,7 +91,7 @@ public abstract class Pawn extends Piece {
 
     @Override
     public Score calculateScore(Score score, boolean hasSameFilePawn) {
-        if(hasSameFilePawn) {
+        if (hasSameFilePawn) {
             return score.sum(new Score(0.5));
         }
         return score.sum(getScore());
