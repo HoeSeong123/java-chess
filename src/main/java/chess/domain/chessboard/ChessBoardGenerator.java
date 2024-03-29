@@ -15,16 +15,15 @@ import chess.domain.chesspiece.slidingPiece.Rook;
 import chess.domain.position.File;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ChessBoardGenerator {
 
     public static Map<Position, Piece> initializeBoard() {
-        Map<Position, Piece> board = new LinkedHashMap<>();
+        Map<Position, Piece> board = new HashMap<>();
         initializeBackRank(board, Rank.EIGHT, BLACK);
         initializeBlackPawnRank(board);
-//        initializeEmptyRanks(board);
         initializeWhitePawnRank(board);
         initializeBackRank(board, Rank.ONE, WHITE);
         return board;
