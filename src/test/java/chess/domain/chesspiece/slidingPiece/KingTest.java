@@ -5,7 +5,6 @@ import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Piece;
 import chess.domain.position.Position;
 import java.util.List;
@@ -18,7 +17,7 @@ class KingTest {
     void King_Move_forward_and_backward() {
         Piece piece = new King(WHITE);
         List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "2"),
-                new Empty());
+                true);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -28,7 +27,7 @@ class KingTest {
     void King_Move_side() {
         Piece piece = new King(WHITE);
         List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "2"),
-                new Empty());
+                true);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -38,7 +37,7 @@ class KingTest {
     void King_Move_diagonal() {
         Piece piece = new King(WHITE);
         List<Position> route = piece.findRoute(new Position("b", "2"), new Position("a", "1"),
-                new Empty());
+                true);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -48,7 +47,7 @@ class KingTest {
     void King_Validate_route() {
         Piece piece = new King(WHITE);
         assertThatThrownBy(() -> {
-            piece.findRoute(new Position("a", "1"), new Position("a", "3"), new Empty());
+            piece.findRoute(new Position("a", "1"), new Position("a", "3"), true);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

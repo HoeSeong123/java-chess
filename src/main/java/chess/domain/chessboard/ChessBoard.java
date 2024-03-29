@@ -1,7 +1,6 @@
 package chess.domain.chessboard;
 
 import chess.domain.Turn;
-import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Piece;
 import chess.domain.position.Position;
 import java.util.Collections;
@@ -11,44 +10,45 @@ public class ChessBoard {
 
     private final Map<Position, Piece> chessBoard;
 
-    private ChessBoard(Map<Position, Piece> chessBoard) {
+    public ChessBoard(Map<Position, Piece> chessBoard) {
         this.chessBoard = chessBoard;
     }
 
-    public static ChessBoard initializeChessBoard() {
-        return new ChessBoard(ChessBoardGenerator.initializeBoard());
-    }
-
     public Turn move(Position source, Position target, Turn turn) {
+        if(isEmpty(source)) {
+            throw new IllegalArgumentException("해당 공간에는 기물이 존재하지 않습니다.");
+        }
         Piece piece = chessBoard.get(source);
-        Piece targetPiece = chessBoard.get(target);
 
         turn.checkValidMove(piece);
 
-        piece.findRoute(source, target, targetPiece)
+        checkTargetIsTeam(piece, target);
+        piece.findRoute(source, target, isEmpty(target))
                 .forEach(this::checkObstacle);
-        checkTargetIsTeam(piece, targetPiece);
 
         replacePieceToTarget(source, target, piece);
 
         return turn.changeTurn();
     }
 
+    private boolean isEmpty(Position target) {
+        return !chessBoard.containsKey(target);
+    }
+
     private void checkObstacle(Position position) {
-        if (!chessBoard.get(position)
-                .isEmpty()) {
-            throw new IllegalArgumentException("이동할 수 없습니다.");
+        if (!isEmpty(position)) {
+            throw new IllegalArgumentException("방해물이 있어 이동할 수 없습니다.");
         }
     }
 
-    private void checkTargetIsTeam(Piece source, Piece target) {
-        if (source.isTeam(target)) {
+    private void checkTargetIsTeam(Piece source, Position targetPosition) {
+        if (!isEmpty(targetPosition) && source.isTeam(chessBoard.get(targetPosition))) {
             throw new IllegalArgumentException("같은 팀이 있는 곳으로는 이동할 수 없습니다.");
         }
     }
 
     private void replacePieceToTarget(Position source, Position target, Piece piece) {
-        chessBoard.put(source, new Empty());
+        chessBoard.remove(source);
         chessBoard.put(target, piece);
     }
 

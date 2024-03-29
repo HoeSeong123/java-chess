@@ -22,6 +22,10 @@ public enum Rank {
         return findRank(convertValueToIndex(value));
     }
 
+    public static Rank from(int index) {
+        return findRank(index);
+    }
+
     private static Rank findRank(int index) {
         return Arrays.stream(values())
                 .filter(rank -> rank.index == index)

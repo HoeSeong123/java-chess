@@ -21,7 +21,7 @@ class PawnTest {
     void Pawn_Move_forward_twice_on_start_position() {
         Piece piece = new WhitePawn();
         List<Position> route = piece.findRoute(new Position("a", "2"), new Position("a", "4"),
-                new Empty());
+                true);
         List<Position> positions = List.of(new Position("a", "3"));
         assertThat(route).isEqualTo(positions);
     }
@@ -31,7 +31,7 @@ class PawnTest {
     void Pawn_Move_forward_once() {
         Piece piece = new WhitePawn();
         List<Position> route = piece.findRoute(new Position("a", "2"), new Position("a", "3"),
-                new Empty());
+                true);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -41,7 +41,7 @@ class PawnTest {
     void Pawn_Can_not_move_diagonal() {
         assertThatThrownBy(() -> {
             Piece piece = new WhitePawn();
-            piece.findRoute(new Position("a", "2"), new Position("b", "3"), new Empty());
+            piece.findRoute(new Position("a", "2"), new Position("b", "3"), true);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -50,7 +50,7 @@ class PawnTest {
     void Pawn_Attack_diagonal() {
         Piece piece = new WhitePawn();
         List<Position> route = piece.findRoute(new Position("a", "2"), new Position("b", "3"),
-                new BlackPawn());
+                false);
         List<Position> positions = List.of();
         assertThat(route).isEqualTo(positions);
     }
@@ -60,7 +60,7 @@ class PawnTest {
     void Pawn_Can_not_attack_forward() {
         assertThatThrownBy(() -> {
             Piece piece = new WhitePawn();
-            piece.findRoute(new Position("a", "2"), new Position("a", "3"), new BlackPawn());
+            piece.findRoute(new Position("a", "2"), new Position("a", "3"), false);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
@@ -72,7 +72,7 @@ class PawnTest {
         Position source = new Position(file1, rank1);
         Position target = new Position(file2, rank2);
         assertThatThrownBy(() -> {
-            piece.findRoute(source, target, new Empty());
+            piece.findRoute(source, target, true);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 

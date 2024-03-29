@@ -26,6 +26,11 @@ public enum File {
         }
     }
 
+    public static File from(int index) {
+        return findFile(index);
+    }
+
+
     public File update(int value) {
         int index = this.index + value;
         if (index >= values().length) {

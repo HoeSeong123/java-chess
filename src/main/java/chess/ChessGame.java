@@ -5,6 +5,7 @@ import static chess.domain.Turn.WHITE_TURN;
 import chess.domain.Command;
 import chess.domain.Turn;
 import chess.domain.chessboard.ChessBoard;
+import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.position.Position;
 import chess.util.RetryUtil;
 import chess.view.InputView;
@@ -17,7 +18,7 @@ public class ChessGame {
     public void run() {
         OutputView.printStartMessage();
         Command command = RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
-        ChessBoard chessBoard = ChessBoard.initializeChessBoard();
+        ChessBoard chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
         while (!command.isEnd()) {
             OutputView.printChessBoard(chessBoard.getChessBoard());
             command = RetryUtil.read(() -> processGame(chessBoard));

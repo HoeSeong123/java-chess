@@ -16,7 +16,7 @@ public abstract class SlidingPiece extends Piece {
     }
 
     @Override
-    public List<Position> findRoute(Position source, Position target, Piece targetPiece) {
+    public List<Position> findRoute(Position source, Position target, boolean isEmpty) {
         List<Position> route = new ArrayList<>();
         validateMovingRule(source, target);
 

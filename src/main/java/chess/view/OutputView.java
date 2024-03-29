@@ -3,7 +3,6 @@ package chess.view;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 
-import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.pawn.BlackPawn;
@@ -12,7 +11,9 @@ import chess.domain.chesspiece.slidingPiece.Bishop;
 import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.chesspiece.slidingPiece.Queen;
 import chess.domain.chesspiece.slidingPiece.Rook;
+import chess.domain.position.File;
 import chess.domain.position.Position;
+import chess.domain.position.Rank;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,19 +21,26 @@ public class OutputView {
     private static final Map<Piece, String> pieceBoard = initializePiece();
 
     public static void printChessBoard(Map<Position, Piece> chessBoard) {
-        int count = 1;
-        for (Piece piece : chessBoard.values()) {
-            printPiece(piece);
-            if (count % 8 == 0) {
-                System.out.println();
-            }
-            count++;
+        for(int i = 8; i >= 1; i--) {
+            printOneRank(chessBoard, i);
         }
         System.out.println();
     }
 
-    private static void printPiece(Piece piece) {
-        System.out.print(pieceBoard.get(piece));
+    private static void printOneRank(Map<Position, Piece> chessBoard, int rankIndex) {
+        for (int j = 1; j <= 8; j++) {
+            Position position = new Position(File.from(j), Rank.from(rankIndex));
+            System.out.println(getPiece(chessBoard, position));
+        }
+        System.out.println();
+    }
+
+    private static String getPiece(Map<Position, Piece> chessBoard, Position position) {
+        if(chessBoard.containsKey(position)) {
+            Piece piece = chessBoard.get(position);
+            return pieceBoard.get(piece);
+        }
+        return ".";
     }
 
     public static void printStartMessage() {
@@ -56,7 +64,6 @@ public class OutputView {
         pieceBoard.put(new Knight(WHITE), "n");
         pieceBoard.put(new BlackPawn(), "P");
         pieceBoard.put(new WhitePawn(), "p");
-        pieceBoard.put(new Empty(), ".");
         return pieceBoard;
     }
 

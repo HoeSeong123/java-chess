@@ -20,8 +20,8 @@ public abstract class Pawn extends Piece {
     protected abstract boolean isStartPosition(Position source);
 
     @Override
-    public List<Position> findRoute(Position source, Position target, Piece targetPiece) {
-        if (targetPiece.isEmpty()) {
+    public List<Position> findRoute(Position source, Position target, boolean isEmpty) {
+        if (isEmpty) {
             return findMovingRoute(source, target);
         }
 

@@ -13,7 +13,7 @@ public abstract class Piece {
         this.score = score;
     }
 
-    public abstract List<Position> findRoute(Position source, Position target, Piece targetPiece);
+    public abstract List<Position> findRoute(Position source, Position target, boolean isEmpty);
 
     protected abstract void validateMovingRule(Position source, Position target);
 

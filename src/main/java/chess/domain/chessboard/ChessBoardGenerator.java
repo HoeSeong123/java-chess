@@ -3,7 +3,6 @@ package chess.domain.chessboard;
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 
-import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.Team;
@@ -25,7 +24,7 @@ public class ChessBoardGenerator {
         Map<Position, Piece> board = new LinkedHashMap<>();
         initializeBackRank(board, Rank.EIGHT, BLACK);
         initializeBlackPawnRank(board);
-        initializeEmptyRanks(board);
+//        initializeEmptyRanks(board);
         initializeWhitePawnRank(board);
         initializeBackRank(board, Rank.ONE, WHITE);
         return board;
@@ -48,13 +47,6 @@ public class ChessBoardGenerator {
 
     private static void initializeWhitePawnRank(Map<Position, Piece> board) {
         initializeFiles(board, Rank.TWO, new WhitePawn());
-    }
-
-    private static void initializeEmptyRanks(Map<Position, Piece> board) {
-        initializeFiles(board, Rank.SIX, new Empty());
-        initializeFiles(board, Rank.FIVE, new Empty());
-        initializeFiles(board, Rank.FOUR, new Empty());
-        initializeFiles(board, Rank.THREE, new Empty());
     }
 
     private static void initializeFiles(Map<Position, Piece> board, Rank rank, Piece piece) {

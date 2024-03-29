@@ -5,7 +5,6 @@ import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
-import chess.domain.chesspiece.Empty;
 import chess.domain.chesspiece.Piece;
 import chess.domain.position.Position;
 import java.util.List;
@@ -18,7 +17,7 @@ class QueenTest {
     void Queen_Move_forward_and_backward() {
         Piece piece = new Queen(WHITE);
         List<Position> route = piece.findRoute(new Position("a", "1"), new Position("a", "4"),
-                new Empty());
+                true);
         List<Position> positions = List.of(new Position("a", "2"), new Position("a", "3"));
         assertThat(route).isEqualTo(positions);
     }
@@ -28,7 +27,7 @@ class QueenTest {
     void Queen_Move_side() {
         Piece piece = new Queen(WHITE);
         List<Position> route = piece.findRoute(new Position("b", "4"), new Position("e", "4"),
-                new Empty());
+                true);
         List<Position> positions = List.of(new Position("c", "4"), new Position("d", "4"));
         assertThat(route).isEqualTo(positions);
     }
@@ -38,7 +37,7 @@ class QueenTest {
     void Queen_Move_diagonal() {
         Piece piece = new Queen(WHITE);
         List<Position> route = piece.findRoute(new Position("b", "2"), new Position("e", "5"),
-                new Empty());
+                true);
         List<Position> positions = List.of(new Position("c", "3"), new Position("d", "4"));
         assertThat(route).isEqualTo(positions);
     }
@@ -48,7 +47,7 @@ class QueenTest {
     void Bishop_Validate_route() {
         Piece piece = new Queen(WHITE);
         assertThatThrownBy(() -> {
-            piece.findRoute(new Position("a", "1"), new Position("b", "4'"), new Empty());
+            piece.findRoute(new Position("a", "1"), new Position("b", "4'"), true);
         }).isInstanceOf(IllegalArgumentException.class);
     }
 
