@@ -10,7 +10,7 @@ public class WhitePawn extends Pawn {
     private static final Rank WHITE_PAWN_START_COLUMN = Rank.TWO;
 
     public WhitePawn() {
-        super(WHITE, new Score(1));
+        super(WHITE);
     }
 
     @Override

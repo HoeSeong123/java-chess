@@ -3,6 +3,7 @@ package chess.domain.chesspiece.pawn;
 import static chess.domain.chesspiece.Team.BLACK;
 
 import chess.domain.chesspiece.Score;
+import chess.domain.chesspiece.Team;
 import chess.domain.position.Position;
 import chess.domain.position.Rank;
 
@@ -10,8 +11,9 @@ public class BlackPawn extends Pawn {
     private static final Rank BLACK_PAWN_START_COLUMN = Rank.SEVEN;
 
     public BlackPawn() {
-        super(BLACK, new Score(1));
+        super(BLACK);
     }
+
 
     @Override
     protected int calculatePawnRankDistance(Position source, Position target) {

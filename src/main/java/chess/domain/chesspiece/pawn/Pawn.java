@@ -11,8 +11,8 @@ import java.util.List;
 
 public abstract class Pawn extends Piece {
 
-    public Pawn(Team team, Score score) {
-        super(team, score);
+    public Pawn(Team team) {
+        super(team, new Score(1));
     }
 
     protected abstract int calculatePawnRankDistance(Position source, Position target);
