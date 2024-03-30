@@ -10,9 +10,11 @@ import java.util.Collections;
 import java.util.List;
 
 public abstract class Pawn extends Piece {
+    private static final Score PAWN_MAX_SCORE = new Score(1);
+    private static final Score PAWN_MIN_SCORE = new Score(0.5);
 
     public Pawn(Team team) {
-        super(team, new Score(1));
+        super(team, PAWN_MAX_SCORE);
     }
 
     protected abstract int calculatePawnRankDistance(Position source, Position target);
@@ -92,7 +94,7 @@ public abstract class Pawn extends Piece {
     @Override
     public Score calculateScore(Score score, boolean hasSameFilePawn) {
         if (hasSameFilePawn) {
-            return score.sum(new Score(0.5));
+            return score.sum(PAWN_MIN_SCORE);
         }
         return score.sum(getScore());
     }

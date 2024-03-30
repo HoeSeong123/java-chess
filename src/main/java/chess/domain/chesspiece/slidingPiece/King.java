@@ -5,9 +5,10 @@ import chess.domain.chesspiece.Team;
 import chess.domain.position.Position;
 
 public class King extends SlidingPiece {
+    private static final Score KING_SCORE = new Score(0);
 
     public King(Team team) {
-        super(team, new Score(0));
+        super(team, KING_SCORE);
     }
 
     @Override

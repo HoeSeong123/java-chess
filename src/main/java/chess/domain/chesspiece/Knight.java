@@ -6,9 +6,10 @@ import java.util.Collections;
 import java.util.List;
 
 public class Knight extends Piece {
+    private static final Score KNIGHT_SCORE = new Score(2.5);
 
     public Knight(Team team) {
-        super(team, new Score(2.5));
+        super(team, KNIGHT_SCORE);
     }
 
     @Override
