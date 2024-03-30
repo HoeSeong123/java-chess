@@ -66,11 +66,10 @@ public class ChessBoard {
     }
 
     public Map<Team, Score> calculateTotalScore() {
-        Map<Team, Score> score = new HashMap<>();
-        score.put(WHITE, calculateTeamScore(WHITE));
-        score.put(BLACK, calculateTeamScore(BLACK));
-
-        return score;
+        return Map.of(
+                WHITE, calculateTeamScore(WHITE),
+                BLACK, calculateTeamScore(BLACK)
+        );
     }
 
     private Score calculateTeamScore(Team team) {
