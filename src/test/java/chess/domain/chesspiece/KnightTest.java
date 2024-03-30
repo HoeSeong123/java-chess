@@ -24,9 +24,9 @@ class KnightTest {
     @DisplayName("목적지 제외 갈 수 있는 위치들이 아니면 예외를 발생한다.")
     void Knight_Validate_route() {
         Piece piece = new Knight(WHITE);
-        assertThatThrownBy(() -> {
-            piece.findRoute(new Position("a", "1"), new Position("b", "4"), true);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->
+            piece.findRoute(new Position("a", "1"), new Position("b", "4"), true)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

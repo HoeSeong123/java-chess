@@ -65,7 +65,7 @@ class ChessBoardTest {
         Position source = new Position(File.a, Rank.SEVEN);
         Position target = new Position(File.b, Rank.EIGHT);
         var sut = new ChessBoard(
-                new HashMap<Position, Piece>() {{
+                new HashMap<>() {{
                     put(new Position(File.b, Rank.EIGHT), new King(BLACK));
                     put(new Position(File.a, Rank.SEVEN), new WhitePawn());
                 }}
@@ -82,13 +82,10 @@ class ChessBoardTest {
         Position source = new Position(File.a, Rank.SEVEN);
         Position target = new Position(File.b, Rank.EIGHT);
         var sut = new ChessBoard(
-                new HashMap<>() {{
-                }}
-        );
+                new HashMap<>());
 
-        assertThatThrownBy(() -> {
-            sut.move(source, target, WHITE_TURN);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> sut.move(source, target, WHITE_TURN))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     /*
@@ -113,9 +110,8 @@ class ChessBoardTest {
                 }}
         );
 
-        assertThatThrownBy(() -> {
-            sut.move(source, target, BLACK_TURN);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> sut.move(source, target, BLACK_TURN))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     /*
@@ -140,9 +136,8 @@ class ChessBoardTest {
                 }}
         );
 
-        assertThatThrownBy(() -> {
-            sut.move(source, target, BLACK_TURN);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> sut.move(source, target, BLACK_TURN))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     /*

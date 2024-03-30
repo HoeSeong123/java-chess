@@ -45,9 +45,9 @@ class KingTest {
     @DisplayName("목적지 제외 갈 수 있는 위치들이 아니면 예외를 발생한다.")
     void King_Validate_route() {
         Piece piece = new King(WHITE);
-        assertThatThrownBy(() -> {
-            piece.findRoute(new Position("a", "1"), new Position("a", "3"), true);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->
+                piece.findRoute(new Position("a", "1"), new Position("a", "3"), true)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -37,9 +37,9 @@ class RookTest {
     @DisplayName("목적지 제외 갈 수 있는 위치들이 아니면 예외를 발생한다.")
     void Rook_Validate_route() {
         Piece piece = new Rook(WHITE);
-        assertThatThrownBy(() -> {
-            piece.findRoute(new Position("a", "1"), new Position("c", "4"), true);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() ->
+            piece.findRoute(new Position("a", "1"), new Position("c", "4"), true)
+        ).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

@@ -67,9 +67,8 @@ class PawnTest {
         Piece piece = new WhitePawn();
         Position source = new Position(file1, rank1);
         Position target = new Position(file2, rank2);
-        assertThatThrownBy(() -> {
-            piece.findRoute(source, target, true);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> piece.findRoute(source, target, true))
+            .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test

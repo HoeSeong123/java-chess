@@ -34,9 +34,8 @@ class BishopTest {
         Position source = new Position(file1, rank1);
         Position target = new Position(file2, rank2);
         Piece piece = new Bishop(WHITE);
-        assertThatThrownBy(() -> {
-            piece.findRoute(source, target, true);
-        }).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> piece.findRoute(source, target, true))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
