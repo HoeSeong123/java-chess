@@ -19,7 +19,7 @@ public class ChessGame {
 
     public void run() {
         OutputView.printStartMessage();
-        Command command = RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
+        RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
         ChessBoard chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
         gameStatus = WHITE_TURN;
         while (gameStatus != GAME_OVER) {
@@ -28,8 +28,7 @@ public class ChessGame {
         }
         OutputView.printGameOverMessage();
 
-        command = RetryUtil.read(() -> Command.getClosingCommand(InputView.readCommand()));
-        if(command == STATUS) {
+        if(RetryUtil.read(() -> Command.getClosingCommand(InputView.readCommand())) == STATUS) {
             OutputView.printScore(chessBoard.calculateTotalScore());
         }
     }
