@@ -42,6 +42,10 @@ public abstract class Piece {
         return team == piece.team;
     }
 
+    public boolean isTeam(Team team) {
+        return this.team == team;
+    }
+
     public boolean isKing() {
         return false;
     }
