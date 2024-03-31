@@ -2,6 +2,7 @@ package chess.domain.dao;
 
 import chess.domain.GameStatus;
 import chess.domain.chessboard.ChessBoard;
+import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.chesspiece.Piece;
 import chess.domain.position.Position;
 import java.sql.Connection;
@@ -45,6 +46,11 @@ public class ChessBoardDao {
             preparedStatement.setLong(1, chessGameDao.findId());
             final var resultSet = preparedStatement.executeQuery();
             Map<Position, Piece> chessBoard = new HashMap<>();
+            if(!resultSet.next()) {
+                ChessBoard initialChessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
+                addChessBoard(initialChessBoard);
+                return initialChessBoard;
+            }
             while(resultSet.next()) {
                 Position position = PositionConverter.convertToPosition(resultSet.getString("position"));
                 Piece piece = pieceDao.findPieceById(resultSet.getByte("piece_id"));

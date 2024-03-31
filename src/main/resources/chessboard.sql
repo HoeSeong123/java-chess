@@ -24,6 +24,9 @@ CREATE TABLE piece
     PRIMARY KEY (id)
 );
 
+INSERT INTO game (game_status)
+VALUES ('WHITE_TURN');
+
 INSERT INTO piece (type, team)
 VALUES ('KING', 'WHITE'),
        ('KING', 'BLACK'),
@@ -36,5 +39,4 @@ VALUES ('KING', 'WHITE'),
        ('KNIGHT', 'WHITE'),
        ('KNIGHT', 'BLACK'),
        ('PAWN', 'WHITE'),
-       ('PAWN', 'BLACK')
-
+       ('PAWN', 'BLACK');

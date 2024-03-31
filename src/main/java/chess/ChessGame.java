@@ -2,26 +2,37 @@ package chess;
 
 import static chess.domain.Command.STATUS;
 import static chess.domain.GameStatus.GAME_OVER;
-import static chess.domain.GameStatus.WHITE_TURN;
 
 import chess.domain.Command;
 import chess.domain.GameStatus;
 import chess.domain.chessboard.ChessBoard;
-import chess.domain.chessboard.ChessBoardGenerator;
+import chess.domain.dao.ChessBoardDao;
+import chess.domain.dao.ChessGameDao;
+import chess.domain.dao.ConnectionGenerator;
 import chess.domain.position.Position;
 import chess.util.RetryUtil;
 import chess.view.InputView;
 import chess.view.OutputView;
+import java.sql.Connection;
 import java.util.List;
 
 public class ChessGame {
+    private final ChessGameDao chessGameDao;
+    private final ChessBoardDao chessBoardDao;
     private GameStatus gameStatus;
+
+    public ChessGame() {
+        Connection connection = ConnectionGenerator.getConnection();
+        chessGameDao = new ChessGameDao(connection);
+        chessBoardDao = new ChessBoardDao(connection);
+    }
 
     public void run() {
         OutputView.printStartMessage();
         RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
-        ChessBoard chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
-        gameStatus = WHITE_TURN;
+        ChessBoard chessBoard = chessBoardDao.loadChessBoard();
+        gameStatus = chessGameDao.findGameStatus();
+
         while (gameStatus != GAME_OVER) {
             OutputView.printChessBoard(chessBoard.getChessBoard());
             gameStatus = RetryUtil.read(() -> processGame(chessBoard));

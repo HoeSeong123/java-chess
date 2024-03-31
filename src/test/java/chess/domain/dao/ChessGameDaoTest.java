@@ -50,7 +50,6 @@ class ChessGameDaoTest {
     @Test
     @DisplayName("게임 상태를 가져온다.")
     void ChessGameDao_Get_gameStatus() {
-        chessGameDao.addChessGame(GameStatus.WHITE_TURN);
         var result = chessGameDao.findGameStatus();
         assertThat(result).isEqualTo(GameStatus.WHITE_TURN);
     }
