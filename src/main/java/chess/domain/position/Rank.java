@@ -64,4 +64,8 @@ public enum Rank {
     public int findDirection(Rank rank) {
         return Integer.compare(rank.index, index);
     }
+
+    public int getIndex() {
+        return index;
+    }
 }
