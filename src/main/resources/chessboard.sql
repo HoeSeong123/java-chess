@@ -1,11 +1,18 @@
 USE chess;
 
-CREATE TABLE board
+CREATE TABLE game
 (
     id          BIGINT      NOT NULL AUTO_INCREMENT,
     game_status VARCHAR(10) NOT NULL,
-    position    CHAR(2)     NOT NULL,
-    piece_id    TINYINT     NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE board
+(
+    id       BIGINT  NOT NULL AUTO_INCREMENT,
+    game_id  BIGINT  NOT NULL,
+    position CHAR(2) NOT NULL,
+    piece_id TINYINT NOT NULL,
     PRIMARY KEY (id)
 );
 
@@ -30,3 +37,4 @@ VALUES ('KING', 'WHITE'),
        ('KNIGHT', 'BLACK'),
        ('PAWN', 'WHITE'),
        ('PAWN', 'BLACK')
+
