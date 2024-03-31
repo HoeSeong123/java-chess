@@ -1,10 +1,13 @@
 package chess.domain.dao;
 
+import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 import static org.junit.jupiter.api.Assertions.*;
 
 import chess.domain.GameStatus;
+import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.slidingPiece.King;
 import java.sql.Connection;
 import java.sql.SQLException;
@@ -32,8 +35,18 @@ class PieceDaoTest {
     }
 
     @Test
-    @DisplayName("체스 게임을 추가한다.")
-    void ChessGameDao_Add_chessGame() {
+    @DisplayName("기물을 추가한다.")
+    void PieceDao_Add_pieceDao() {
         assertThatCode(() -> pieceDao.addPiece(new King(WHITE)));
+    }
+
+    @Test
+    @DisplayName("기물 정보를 통해 id를 가져온다.")
+    void PieceDao_Find_id_by_piece() {
+        Piece piece = new King(BLACK);
+
+        var result = pieceDao.findIdByPiece(piece);
+
+        assertThat(result).isEqualTo((byte) 2);
     }
 }

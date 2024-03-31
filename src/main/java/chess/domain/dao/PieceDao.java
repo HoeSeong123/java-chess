@@ -25,4 +25,18 @@ public class PieceDao {
         }
     }
 
+    public byte findIdByPiece(final Piece piece) {
+        final var query = "SELECT id FROM piece WHERE type = ? AND team = ?";
+        try (final var preparedStatement = connection.prepareStatement(query)) {
+            PieceMapper pieceMapper = PieceMapper.from(piece);
+            preparedStatement.setString(1, pieceMapper.getType());
+            preparedStatement.setString(2, pieceMapper.getTeam());
+
+            final var resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getByte("id");
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

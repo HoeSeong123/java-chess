@@ -15,18 +15,18 @@ import chess.domain.chesspiece.slidingPiece.Rook;
 import java.util.Arrays;
 
 public enum PieceMapper {
-    WHITE_KING("King", "WHITE", new King(WHITE)),
-    BLACK_KING("King", "BLACK", new King(BLACK)),
-    WHITE_QUEEN("Queen", "WHITE", new Queen(WHITE)),
-    BLACK_QUEEN("Queen", "BLACK", new Queen(BLACK)),
-    WHITE_ROOK("Rook", "WHITE", new Rook(WHITE)),
-    BLACK_ROOK("Rook", "BLACK", new Rook(BLACK)),
-    WHITE_BISHOP("Bishop", "WHITE", new Bishop(WHITE)),
-    BLACK_BISHOP("Bishop", "BLACK", new Bishop(BLACK)),
-    WHITE_KNIGHT("Knight", "WHITE", new Knight(WHITE)),
-    BLACK_KNIGHT("Knight", "BLACK", new Knight(BLACK)),
-    WHITE_PAWN("Pawn", "WHITE", new WhitePawn()),
-    BLACK_PAWN("Pawn", "BLACK", new BlackPawn());
+    WHITE_KING("KING", "WHITE", new King(WHITE)),
+    BLACK_KING("KING", "BLACK", new King(BLACK)),
+    WHITE_QUEEN("QUEEN", "WHITE", new Queen(WHITE)),
+    BLACK_QUEEN("QUEEN", "BLACK", new Queen(BLACK)),
+    WHITE_ROOK("ROOK", "WHITE", new Rook(WHITE)),
+    BLACK_ROOK("ROOK", "BLACK", new Rook(BLACK)),
+    WHITE_BISHOP("BISHOP", "WHITE", new Bishop(WHITE)),
+    BLACK_BISHOP("BISHOP", "BLACK", new Bishop(BLACK)),
+    WHITE_KNIGHT("KNIGHT", "WHITE", new Knight(WHITE)),
+    BLACK_KNIGHT("KNIGHT", "BLACK", new Knight(BLACK)),
+    WHITE_PAWN("PAWN", "WHITE", new WhitePawn()),
+    BLACK_PAWN("PAWN", "BLACK", new BlackPawn());
 
     private String type;
     private String team;
