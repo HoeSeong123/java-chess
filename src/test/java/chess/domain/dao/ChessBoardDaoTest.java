@@ -1,13 +1,12 @@
 package chess.domain.dao;
 
 import static chess.domain.chesspiece.Team.BLACK;
+import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-import chess.domain.GameStatus;
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
-import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.position.Position;
 import java.sql.Connection;
@@ -27,7 +26,7 @@ class ChessBoardDaoTest {
         try {
             connection = ConnectionGenerator.getConnection();
             connection.setAutoCommit(false);
-        } catch(SQLException ignored) {
+        } catch (SQLException ignored) {
         }
     }
 
@@ -38,10 +37,25 @@ class ChessBoardDaoTest {
 
     @Test
     @DisplayName("체스 보드를 추가한다.")
-    void ChessGameDao_Add_chessGame() {
+    void ChessBoardDao_Add_chessBoard() {
         ChessBoard chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
-        assertThatCode(() -> chessBoardDao.addAll(chessBoard))
+        assertThatCode(() -> chessBoardDao.addChessBoard(chessBoard))
                 .doesNotThrowAnyException();
     }
 
+    @Test
+    @DisplayName("체스 보드를 가져온다.")
+    void ChessBoardDao_Load_chessBoard() {
+        ChessBoard chessBoard = new ChessBoard(
+                Map.of(
+                        new Position("a", "1"), new King(BLACK),
+                        new Position("b", "3"), new King(WHITE)
+                ));
+        chessBoardDao.addChessBoard(chessBoard);
+
+        var result = chessBoardDao.loadChessBoard().getChessBoard();
+
+        assertThat(result.get(new Position("a", "1"))).isEqualTo(new King(BLACK));
+        assertThat(result.get(new Position("b", "3"))).isEqualTo(new King(WHITE));
+    }
 }

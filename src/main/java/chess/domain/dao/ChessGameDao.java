@@ -27,9 +27,18 @@ public class ChessGameDao {
         try (final var preparedStatement = connection.prepareStatement(query)) {
             final var resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            String tmp = resultSet.getString("game_status");
-            System.out.println(tmp);
-            return GameStatus.findGameStatus(tmp);
+            return GameStatus.findGameStatus(resultSet.getString("game_status"));
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public long findId() {
+        final var query = "SELECT id FROM game LIMIT 1";
+        try (final var preparedStatement = connection.prepareStatement(query)) {
+            final var resultSet = preparedStatement.executeQuery();
+            resultSet.next();
+            return resultSet.getLong("id");
         } catch (final SQLException e) {
             throw new RuntimeException(e);
         }
