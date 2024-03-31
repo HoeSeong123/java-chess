@@ -11,18 +11,6 @@ public class PieceDao {
         this.connection = connection;
     }
 
-    public void addPiece(Piece piece) {
-        final var query = "INSERT INTO piece(type, team) VALUES(?, ?)";
-        try (final var preparedStatement = connection.prepareStatement(query)) {
-            PieceMapper pieceMapper = PieceMapper.from(piece);
-            preparedStatement.setString(1, pieceMapper.getType());
-            preparedStatement.setString(2, pieceMapper.getTeam());
-            preparedStatement.executeUpdate();
-        } catch (final SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
-
     public byte findIdByPiece(final Piece piece) {
         final var query = "SELECT id FROM piece WHERE type = ? AND team = ?";
         try (final var preparedStatement = connection.prepareStatement(query)) {

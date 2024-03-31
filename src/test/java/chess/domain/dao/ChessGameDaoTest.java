@@ -41,9 +41,9 @@ class ChessGameDaoTest {
     }
 
     @Test
-    @DisplayName("체스 게임을 추가한다.")
+    @DisplayName("체스 게임을 업데이트한다.")
     void ChessGameDao_Add_chessGame() {
-        assertThatCode(() -> chessGameDao.addChessGame(GameStatus.WHITE_TURN))
+        assertThatCode(() -> chessGameDao.updateGameStatus(GameStatus.WHITE_TURN))
                 .doesNotThrowAnyException();
     }
 

@@ -1,6 +1,8 @@
 package chess.domain.dao;
 
-import chess.domain.GameStatus;
+import static chess.domain.GameStatus.GAME_OVER;
+import static chess.domain.GameStatus.WHITE_TURN;
+
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.chesspiece.Piece;
@@ -45,18 +47,56 @@ public class ChessBoardDao {
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, chessGameDao.findId());
             final var resultSet = preparedStatement.executeQuery();
-            Map<Position, Piece> chessBoard = new HashMap<>();
-            if(!resultSet.next()) {
+            if(!resultSet.next() || chessGameDao.findGameStatus() == GAME_OVER) {
                 ChessBoard initialChessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
+                deleteAll();
                 addChessBoard(initialChessBoard);
+                chessGameDao.updateGameStatus(WHITE_TURN);
                 return initialChessBoard;
             }
-            while(resultSet.next()) {
+
+            Map<Position, Piece> chessBoard = new HashMap<>();
+            do {
                 Position position = PositionConverter.convertToPosition(resultSet.getString("position"));
                 Piece piece = pieceDao.findPieceById(resultSet.getByte("piece_id"));
                 chessBoard.put(position, piece);
-            }
+            } while(resultSet.next());
             return new ChessBoard(chessBoard);
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void deleteAll() {
+        final var query = "DELETE FROM board";
+        try (final var preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.executeUpdate();
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void movePiece(Position source, Position target) {
+        delete(target);
+        updateBoard(source, target);
+    }
+
+    private void delete(Position position) {
+        final var query = "DELETE FROM board WHERE position = ?";
+        try (final var preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, PositionConverter.convertToString(position));
+            preparedStatement.executeUpdate();
+        } catch (final SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private void updateBoard(Position source, Position target) {
+        final var query = "UPDATE board SET position = ? WHERE position = ?";
+        try (final var preparedStatement = connection.prepareStatement(query)) {
+            preparedStatement.setString(1, PositionConverter.convertToString(target));
+            preparedStatement.setString(2, PositionConverter.convertToString(source));
+            preparedStatement.executeUpdate();
         } catch (final SQLException e) {
             throw new RuntimeException(e);
         }

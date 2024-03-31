@@ -40,3 +40,7 @@ VALUES ('KING', 'WHITE'),
        ('KNIGHT', 'BLACK'),
        ('PAWN', 'WHITE'),
        ('PAWN', 'BLACK');
+
+SELECT * from board;
+
+delete from board where position = 'a5';

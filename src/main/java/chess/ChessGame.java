@@ -2,6 +2,7 @@ package chess;
 
 import static chess.domain.Command.STATUS;
 import static chess.domain.GameStatus.GAME_OVER;
+import static chess.domain.GameStatus.WHITE_TURN;
 
 import chess.domain.Command;
 import chess.domain.GameStatus;
@@ -36,6 +37,7 @@ public class ChessGame {
         while (gameStatus != GAME_OVER) {
             OutputView.printChessBoard(chessBoard.getChessBoard());
             gameStatus = RetryUtil.read(() -> processGame(chessBoard));
+            chessGameDao.updateGameStatus(gameStatus);
         }
         OutputView.printGameOverMessage();
 
@@ -52,7 +54,10 @@ public class ChessGame {
             List<String> targetPosition = InputView.readPosition();
             Position target = new Position(targetPosition.get(0), targetPosition.get(1));
 
-            return chessBoard.move(source, target, gameStatus);
+            gameStatus = chessBoard.move(source, target, gameStatus);
+            chessBoardDao.movePiece(source, target);
+
+            return gameStatus;
         }
         return GAME_OVER;
     }

@@ -11,8 +11,8 @@ public class ChessGameDao {
         this.connection = connection;
     }
 
-    public void addChessGame(GameStatus gameStatus) {
-        final var query = "INSERT INTO game(game_status) VALUES(?)";
+    public void updateGameStatus(GameStatus gameStatus) {
+        final var query = "UPDATE game SET game_status = ? LIMIT 1";
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setString(1, gameStatus.name());
             preparedStatement.executeUpdate();

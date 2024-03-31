@@ -35,12 +35,6 @@ class PieceDaoTest {
     }
 
     @Test
-    @DisplayName("기물을 추가한다.")
-    void PieceDao_Add_pieceDao() {
-        assertThatCode(() -> pieceDao.addPiece(new King(WHITE)));
-    }
-
-    @Test
     @DisplayName("기물 정보를 통해 id를 가져온다.")
     void PieceDao_Find_id_by_piece() {
         Piece piece = new King(BLACK);
