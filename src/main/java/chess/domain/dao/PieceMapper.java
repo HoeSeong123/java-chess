@@ -6,7 +6,6 @@ import static chess.domain.chesspiece.Team.WHITE;
 import chess.domain.chesspiece.Knight;
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.pawn.BlackPawn;
-import chess.domain.chesspiece.pawn.Pawn;
 import chess.domain.chesspiece.pawn.WhitePawn;
 import chess.domain.chesspiece.slidingPiece.Bishop;
 import chess.domain.chesspiece.slidingPiece.King;
@@ -43,6 +42,15 @@ public enum PieceMapper {
                 .filter(pieceMapper -> pieceMapper.piece.equals(piece))
                 .findAny()
                 .orElseThrow(() -> new IllegalStateException("해당 기물이 DB에 존재하지 않습니다."));
+    }
+
+    public static Piece mapToPiece(String type, String team) {
+        return Arrays.stream(values())
+                .filter(pieceMapper -> pieceMapper.type.equals(type))
+                .filter(pieceMapper -> pieceMapper.team.equals(team))
+                .findAny()
+                .orElseThrow(() -> new IllegalStateException("해당 기물이 DB에 존재하지 않습니다."))
+                .piece;
     }
 
     public String getType() {

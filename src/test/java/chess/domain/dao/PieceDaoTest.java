@@ -49,4 +49,11 @@ class PieceDaoTest {
 
         assertThat(result).isEqualTo((byte) 2);
     }
+
+    @Test
+    @DisplayName("id를 통해 해당 기물 정보를 가져온다.")
+    void PieceDao_Find_piece_by_id() {
+        var result = pieceDao.findPieceById((byte) 2);
+        assertThat(result).isEqualTo(new King(BLACK));
+    }
 }
