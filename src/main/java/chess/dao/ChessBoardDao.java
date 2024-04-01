@@ -1,4 +1,4 @@
-package chess.domain.dao;
+package chess.dao;
 
 import static chess.domain.GameStatus.GAME_OVER;
 import static chess.domain.GameStatus.WHITE_TURN;

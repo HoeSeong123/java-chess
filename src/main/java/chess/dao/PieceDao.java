@@ -1,4 +1,4 @@
-package chess.domain.dao;
+package chess.dao;
 
 import chess.domain.chesspiece.Piece;
 import java.sql.Connection;

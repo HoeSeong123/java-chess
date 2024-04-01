@@ -1,12 +1,10 @@
-package chess.domain.dao;
+package chess.dao;
 
 import static chess.domain.chesspiece.Team.BLACK;
-import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
-import chess.domain.GameStatus;
+import chess.dao.ConnectionGenerator;
+import chess.dao.PieceDao;
 import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.slidingPiece.King;
 import java.sql.Connection;

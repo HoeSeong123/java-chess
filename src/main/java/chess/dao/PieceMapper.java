@@ -1,4 +1,4 @@
-package chess.domain.dao;
+package chess.dao;
 
 import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;

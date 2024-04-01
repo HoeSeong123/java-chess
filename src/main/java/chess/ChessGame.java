@@ -2,14 +2,13 @@ package chess;
 
 import static chess.domain.Command.STATUS;
 import static chess.domain.GameStatus.GAME_OVER;
-import static chess.domain.GameStatus.WHITE_TURN;
 
 import chess.domain.Command;
 import chess.domain.GameStatus;
 import chess.domain.chessboard.ChessBoard;
-import chess.domain.dao.ChessBoardDao;
-import chess.domain.dao.ChessGameDao;
-import chess.domain.dao.ConnectionGenerator;
+import chess.dao.ChessBoardDao;
+import chess.dao.ChessGameDao;
+import chess.dao.ConnectionGenerator;
 import chess.domain.position.Position;
 import chess.util.RetryUtil;
 import chess.view.InputView;

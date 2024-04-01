@@ -1,13 +1,13 @@
-package chess.domain.dao;
+package chess.dao;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
-import static org.junit.jupiter.api.Assertions.*;
 
+import chess.dao.ChessGameDao;
+import chess.dao.ConnectionGenerator;
 import chess.domain.GameStatus;
 import java.sql.Connection;
 import java.sql.SQLException;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
