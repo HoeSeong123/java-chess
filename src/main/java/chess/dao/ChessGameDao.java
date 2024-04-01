@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class ChessGameDao {
+    private static final String GAME_STATUS = "game_status";
+
     private final Connection connection;
 
     public ChessGameDao(Connection connection) {
@@ -23,11 +25,11 @@ public class ChessGameDao {
     }
 
     public GameStatus findGameStatus() {
-        final var query = "SELECT game_status FROM game LIMIT 1";
+        final var query = String.format("SELECT %s FROM game LIMIT 1", GAME_STATUS);
         try (final var preparedStatement = connection.prepareStatement(query)) {
             final var resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            return GameStatus.findGameStatus(resultSet.getString("game_status"));
+            return GameStatus.findGameStatus(resultSet.getString(GAME_STATUS));
         } catch (final SQLException e) {
             throw new RuntimeException(e);
         }

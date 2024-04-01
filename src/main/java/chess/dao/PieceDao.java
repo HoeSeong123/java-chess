@@ -5,6 +5,9 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 public class PieceDao {
+    private static final String TYPE = "type";
+    private static final String TEAM = "team";
+
     private final Connection connection;
 
     public PieceDao(Connection connection) {
@@ -27,14 +30,14 @@ public class PieceDao {
     }
 
     public Piece findPieceById(byte id) {
-        final var query = "SELECT type, team FROM piece WHERE id = ?";
+        final var query = String.format("SELECT %s, %s FROM piece WHERE id = ?", TYPE, TEAM);
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setByte(1, id);
 
             final var resultSet = preparedStatement.executeQuery();
             resultSet.next();
-            String type = resultSet.getString("type");
-            String team = resultSet.getString("team");
+            String type = resultSet.getString(TYPE);
+            String team = resultSet.getString(TEAM);
             return PieceMapper.mapToPiece(type, team);
         } catch (final SQLException e) {
             throw new RuntimeException(e);
