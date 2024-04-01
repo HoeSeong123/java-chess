@@ -4,10 +4,10 @@ import static chess.domain.chesspiece.Team.BLACK;
 import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
+import static org.junit.jupiter.api.Assertions.assertAll;
 
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
-import chess.domain.chesspiece.pawn.WhitePawn;
 import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.position.Position;
 import java.sql.Connection;
@@ -66,8 +66,10 @@ class ChessBoardDaoTest {
         var result = chessBoardDao.loadChessBoard()
                 .getChessBoard();
 
-        assertThat(result.get(new Position("a", "1"))).isEqualTo(new King(BLACK));
-        assertThat(result.get(new Position("b", "3"))).isEqualTo(new King(WHITE));
+        assertAll(
+                () -> assertThat(result.get(new Position("a", "1"))).isEqualTo(new King(BLACK)),
+                () -> assertThat(result.get(new Position("b", "3"))).isEqualTo(new King(WHITE))
+        );
     }
 
     @Test
