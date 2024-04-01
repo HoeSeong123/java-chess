@@ -7,6 +7,7 @@ import static org.assertj.core.api.Assertions.assertThatCode;
 
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
+import chess.domain.chesspiece.pawn.WhitePawn;
 import chess.domain.chesspiece.slidingPiece.King;
 import chess.domain.position.Position;
 import java.sql.Connection;
@@ -62,9 +63,29 @@ class ChessBoardDaoTest {
                 ));
         chessBoardDao.addChessBoard(chessBoard);
 
-        var result = chessBoardDao.loadChessBoard().getChessBoard();
+        var result = chessBoardDao.loadChessBoard()
+                .getChessBoard();
 
         assertThat(result.get(new Position("a", "1"))).isEqualTo(new King(BLACK));
         assertThat(result.get(new Position("b", "3"))).isEqualTo(new King(WHITE));
+    }
+
+    @Test
+    @DisplayName("기물을 움직여 보드의 정보를 최신화한다.")
+    void ChessBoardDao_Update_board_when_move_piece() {
+        chessBoardDao.addChessBoard(new ChessBoard(
+                Map.of(
+                        new Position("a", "1"), new King(BLACK),
+                        new Position("b", "3"), new King(WHITE)
+                )));
+        Position source = new Position("a", "1");
+        Position target = new Position("a", "2");
+
+        chessBoardDao.movePiece(source, target);
+        var result = chessBoardDao.loadChessBoard()
+                .getChessBoard();
+
+        assertThat(result.get(new Position("a", "2"))).isEqualTo(new King(BLACK));
+
     }
 }
