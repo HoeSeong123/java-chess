@@ -21,7 +21,8 @@ CREATE TABLE piece
     id   TINYINT    NOT NULL AUTO_INCREMENT,
     type VARCHAR(6) NOT NULL,
     team CHAR(5)    NOT NULL,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    CONSTRAINT type_with_team UNIQUE (type, team)
 );
 
 INSERT INTO game (game_status)
