@@ -12,7 +12,7 @@ public enum Rank {
     SEVEN(7),
     EIGHT(8);
 
-    private int index;
+    private final int index;
 
     Rank(int index) {
         this.index = index;

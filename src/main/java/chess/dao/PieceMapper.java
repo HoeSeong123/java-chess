@@ -27,9 +27,9 @@ public enum PieceMapper {
     WHITE_PAWN("PAWN", "WHITE", new WhitePawn()),
     BLACK_PAWN("PAWN", "BLACK", new BlackPawn());
 
-    private String type;
-    private String team;
-    private Piece piece;
+    private final String type;
+    private final String team;
+    private final Piece piece;
 
     PieceMapper(String type, String team, Piece piece) {
         this.type = type;
