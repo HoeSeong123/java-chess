@@ -5,8 +5,6 @@ import static chess.domain.chesspiece.Team.WHITE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatCode;
 
-import chess.dao.ChessBoardDao;
-import chess.dao.ConnectionGenerator;
 import chess.domain.chessboard.ChessBoard;
 import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.chesspiece.slidingPiece.King;
@@ -14,6 +12,8 @@ import chess.domain.position.Position;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.Map;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -24,17 +24,24 @@ class ChessBoardDaoTest {
     private static Connection connection;
 
     @BeforeAll
-    static void connection() {
-        try {
-            connection = ConnectionGenerator.getConnection();
-            connection.setAutoCommit(false);
-        } catch (SQLException ignored) {
-        }
+    static void connection() throws SQLException {
+        connection = ConnectionGenerator.getConnection();
+        connection.setAutoCommit(false);
     }
 
     @BeforeEach
     void setUp() {
         chessBoardDao = new ChessBoardDao(connection);
+    }
+
+    @AfterAll
+    static void exit() throws SQLException {
+        connection.setAutoCommit(true);
+    }
+
+    @AfterEach
+    void rollBack() throws SQLException {
+        connection.rollback();
     }
 
     @Test

@@ -9,6 +9,8 @@ import chess.domain.chesspiece.Piece;
 import chess.domain.chesspiece.slidingPiece.King;
 import java.sql.Connection;
 import java.sql.SQLException;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -19,17 +21,24 @@ class PieceDaoTest {
     private static Connection connection;
 
     @BeforeAll
-    static void connection() {
-        try {
-            connection = ConnectionGenerator.getConnection();
-            connection.setAutoCommit(false);
-        } catch(SQLException ignored) {
-        }
+    static void connection() throws SQLException {
+        connection = ConnectionGenerator.getConnection();
+        connection.setAutoCommit(false);
     }
 
     @BeforeEach
     void setUp() {
         pieceDao = new PieceDao(connection);
+    }
+
+    @AfterAll
+    static void exit() throws SQLException {
+        connection.setAutoCommit(true);
+    }
+
+    @AfterEach
+    void rollBack() throws SQLException {
+        connection.rollback();
     }
 
     @Test
