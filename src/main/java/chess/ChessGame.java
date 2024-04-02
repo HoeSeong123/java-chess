@@ -2,6 +2,7 @@ package chess;
 
 import static chess.domain.Command.STATUS;
 import static chess.domain.GameStatus.GAME_OVER;
+import static chess.domain.GameStatus.WHITE_TURN;
 
 import chess.domain.Command;
 import chess.domain.GameStatus;
@@ -9,6 +10,7 @@ import chess.domain.chessboard.ChessBoard;
 import chess.dao.ChessBoardDao;
 import chess.dao.ChessGameDao;
 import chess.dao.ConnectionGenerator;
+import chess.domain.chessboard.ChessBoardGenerator;
 import chess.domain.position.Position;
 import chess.util.RetryUtil;
 import chess.view.InputView;
@@ -30,8 +32,7 @@ public class ChessGame {
     public void run() {
         OutputView.printStartMessage();
         RetryUtil.read(() -> Command.getStartCommand(InputView.readCommand()));
-        ChessBoard chessBoard = chessBoardDao.loadChessBoard();
-        gameStatus = chessGameDao.findGameStatus();
+        ChessBoard chessBoard = loadChessBoard();
 
         while (gameStatus != GAME_OVER) {
             OutputView.printChessBoard(chessBoard.getChessBoard());
@@ -43,6 +44,21 @@ public class ChessGame {
         if(RetryUtil.read(() -> Command.getClosingCommand(InputView.readCommand())) == STATUS) {
             OutputView.printScore(chessBoard.calculateTotalScore());
         }
+    }
+
+    private ChessBoard loadChessBoard() {
+        ChessBoard chessBoard = chessBoardDao.loadChessBoard();
+        gameStatus = chessGameDao.findGameStatus();
+
+        if(chessBoard.isEmpty() || gameStatus == GAME_OVER) {
+            chessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
+            chessBoardDao.deleteAll();
+            chessBoardDao.addChessBoard(chessBoard);
+            chessGameDao.updateGameStatus(WHITE_TURN);
+            gameStatus = chessGameDao.findGameStatus();
+        }
+
+        return chessBoard;
     }
 
     private GameStatus processGame(ChessBoard chessBoard) {

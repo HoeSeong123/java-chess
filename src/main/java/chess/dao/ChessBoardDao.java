@@ -47,27 +47,19 @@ public class ChessBoardDao {
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.setLong(1, chessGameDao.findId());
             final var resultSet = preparedStatement.executeQuery();
-            if(!resultSet.next() || chessGameDao.findGameStatus() == GAME_OVER) {
-                ChessBoard initialChessBoard = new ChessBoard(ChessBoardGenerator.initializeBoard());
-                deleteAll();
-                addChessBoard(initialChessBoard);
-                chessGameDao.updateGameStatus(WHITE_TURN);
-                return initialChessBoard;
-            }
-
             Map<Position, Piece> chessBoard = new HashMap<>();
-            do {
+            while(resultSet.next()) {
                 Position position = PositionConverter.convertToPosition(resultSet.getString("position"));
                 Piece piece = pieceDao.findPieceById(resultSet.getByte("piece_id"));
                 chessBoard.put(position, piece);
-            } while(resultSet.next());
+            }
             return new ChessBoard(chessBoard);
         } catch (final SQLException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void deleteAll() {
+    public void deleteAll() {
         final var query = "DELETE FROM board";
         try (final var preparedStatement = connection.prepareStatement(query)) {
             preparedStatement.executeUpdate();
