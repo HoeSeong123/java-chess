@@ -10,6 +10,9 @@ public class ConnectionGenerator {
     private static final String OPTION = "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
     private static final String USERNAME = "root";
     private static final String PASSWORD = "root";
+    
+    private ConnectionGenerator() {
+    }
 
     public static Connection getConnection() {
         try {
